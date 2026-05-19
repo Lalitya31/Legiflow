@@ -41,6 +41,15 @@ const sections = [
   },
 ];
 
+const mockResults = [
+  {
+    text: "...the employee shall not engage in any competitive activity for a period of [24 months] following termination of employment...",
+    source: "NDA_2025.pdf",
+    risk: "HIGH",
+    explanation: "This stops you from working in the same industry for 2 years.",
+  },
+];
+
 function AppHeader() {
     const { theme, toggleTheme } = useTheme();
     const pathname = usePathname();
@@ -135,5 +144,79 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </body>
         </html>
     );
+}
+
+export function LegalSpotlightSearch() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [documentContext, setDocumentContext] = useState("");
+  const [showDocumentContext, setShowDocumentContext] = useState(false);
+  const [results, setResults] = useState(mockResults);
+
+  const handleSearch = () => {
+    // Simulate search logic
+    setResults(mockResults.filter((result) => result.text.includes(searchQuery)));
+  };
+
+  return (
+    <div className="max-w-[720px] mx-auto p-[var(--space-lg)]">
+      <h1 className="font-serif text-[40px] font-normal leading-[1.15] tracking-[-0.02em]">
+        Find a Clause
+      </h1>
+
+      {/* Search Bar */}
+      <div className="relative mt-[var(--space-md)]">
+        <input
+          type="text"
+          placeholder="Search for any clause — e.g. 'termination', 'non-compete'..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full border-b border-border-subtle focus:outline-none focus:border-foreground text-[16px]"
+        />
+        <button
+          onClick={handleSearch}
+          className="absolute right-0 top-1/2 -translate-y-1/2 text-muted hover:text-foreground"
+        >
+          🔍
+        </button>
+      </div>
+
+      {/* Document Context */}
+      <div className="mt-[var(--space-lg)]">
+        <button
+          onClick={() => setShowDocumentContext(!showDocumentContext)}
+          className="text-sm font-medium hover:underline"
+        >
+          {showDocumentContext ? "- Collapse document context" : "+ Paste a specific document to search within it"}
+        </button>
+        {showDocumentContext && (
+          <textarea
+            value={documentContext}
+            onChange={(e) => setDocumentContext(e.target.value)}
+            placeholder="Paste your document here..."
+            className="w-full mt-[var(--space-sm)] p-[var(--space-sm)] border border-border-subtle rounded-md focus:outline-none focus:border-foreground"
+            rows={5}
+          />
+        )}
+      </div>
+
+      {/* Results */}
+      <div className="mt-[var(--space-xl)] space-y-[var(--space-lg)]">
+        {results.map((result, index) => (
+          <div key={index} className="space-y-[var(--space-sm)]">
+            <p className="text-[14px] leading-[1.6]">
+              {result.text.replace(
+                new RegExp(searchQuery, "gi"),
+                (match) => `<strong>${match}</strong>`
+              )}
+            </p>
+            <p className="text-muted text-[12px]">
+              Source: <a href="#" className="hover:underline">{result.source}</a> Risk: {result.risk}
+            </p>
+            <p className="text-muted italic text-[12px]">{result.explanation}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
