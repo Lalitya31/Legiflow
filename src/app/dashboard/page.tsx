@@ -50,7 +50,7 @@ export default function DashboardPage() {
                     <p className="text-muted mt-[var(--space-sm)]">
                         Upload agreements, identify risky clauses, and explore Indian law in plain language.
                     </p>
-                    <button className="mt-[var(--space-md)] bg-primary text-primary-foreground px-4 py-2 rounded">
+                    <button className="mt-[var(--space-md)] bg-primary text-primary-foreground px-[var(--space-lg)] py-[var(--space-sm)] rounded transition-all duration-150 ease-out cursor-pointer hover:bg-primary/90">
                         Upload a Document
                     </button>
                 </section>

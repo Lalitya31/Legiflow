@@ -25,7 +25,7 @@ export default function AgreementsPage() {
         <h1 className="font-serif text-[40px] font-normal leading-[1.15] tracking-[-0.02em]">
           Agreements
         </h1>
-        <button className="border border-border-subtle text-primary px-4 py-2 rounded">
+        <button className="border border-border-subtle text-primary px-[var(--space-lg)] py-[var(--space-sm)] rounded transition-all duration-150 ease-out cursor-pointer hover:bg-primary/10">
           Upload New Agreement
         </button>
       </div>
@@ -36,7 +36,7 @@ export default function AgreementsPage() {
         <input
           type="text"
           placeholder="Search agreements..."
-          className="w-full border-b border-border-subtle pl-10 py-2 focus:outline-none focus:border-primary"
+          className="w-full border-b border-border-subtle pl-[var(--space-lg)] py-[var(--space-sm)] focus:outline-none focus:border-primary transition-all duration-150 ease-out"
         />
       </div>
 

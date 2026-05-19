@@ -53,19 +53,21 @@
   }
 
   header button {
-    transition: background-color 0.2s;
+    transition: all 0.15s ease;
+    cursor: pointer;
   }
 
   header button:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--border-subtle);
   }
 
   aside nav a {
-    transition: background-color 0.2s, color 0.2s;
+    transition: all 0.15s ease;
+    cursor: pointer;
   }
 
   aside nav a:hover {
-    background-color: rgba(0, 0, 0, 0.05);
+    background-color: var(--border-subtle);
   }
 
   /* Sidebar active state */
@@ -108,21 +110,28 @@
   .button-primary {
     background-color: var(--text-primary);
     color: var(--bg-primary);
-    border-radius: 5px;
+    border-radius: 6px;
     box-shadow: none;
+    transition: all 0.15s ease;
+    cursor: pointer;
   }
   .button-secondary {
     background-color: transparent;
     border: 1px solid var(--border-subtle);
     color: var(--text-primary);
+    transition: all 0.15s ease;
+    cursor: pointer;
   }
   .button-ghost {
     background: none;
     color: var(--text-muted);
     text-decoration: underline;
+    transition: all 0.15s ease;
+    cursor: pointer;
   }
   .button-ghost:hover {
     text-decoration: none;
+    color: var(--text-primary);
   }
 
   h1 {
@@ -182,12 +191,12 @@
   }
   
   .dark body {
-     background:linear-gradient(180deg, #071024 0%, #071429 60%);
+     background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 60%);
   }
 
   .glass-card {
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      border:1px solid rgba(255,255,255,0.03)
+      background: var(--card);
+      border: 1px solid var(--border-subtle);
   }
 }
 
@@ -272,17 +281,20 @@
 
   .upload-page .dropzone {
     border: 2px dashed var(--border-subtle);
-    border-radius: 8px;
+    border-radius: 6px;
     padding: var(--space-lg);
+    transition: all 0.15s ease;
+    cursor: pointer;
   }
 
   .upload-page .textarea {
     width: 100%;
     height: 200px;
     border: 1px solid var(--border-subtle);
-    border-radius: 8px;
+    border-radius: 6px;
     padding: var(--space-sm);
     font-size: 14px;
+    transition: all 0.15s ease;
   }
 
   .upload-page .what-next {

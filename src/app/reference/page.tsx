@@ -49,9 +49,9 @@ export default function LegalReferencePage() {
     ), [searchTerm]);
 
   const renderList = (data: { [key: string]: string }[], keyName: string, keyDescription: string) => (
-    <div className="space-y-4 max-h-[60vh] overflow-y-auto pr-4">
+    <div className="space-y-[var(--space-lg)] max-h-[60vh] overflow-y-auto pr-[var(--space-lg)]">
         {data.length > 0 ? data.map((item, index) => (
-            <Card key={index} className="bg-card/50">
+            <Card key={index} className="bg-card/50 cursor-pointer transition-all duration-150 ease-out hover:bg-card">
                 <CardHeader>
                     <CardTitle className="text-base font-semibold">{item[keyName]}</CardTitle>
                 </CardHeader>
@@ -59,7 +59,7 @@ export default function LegalReferencePage() {
                     <p className="text-sm text-muted-foreground">{item[keyDescription]}</p>
                 </CardContent>
             </Card>
-        )) : <p className="text-center text-muted-foreground py-10">No results found for '{searchTerm}'.</p>}
+        )) : <p className="text-center text-muted-foreground py-[var(--space-2xl)]">No results found for '{searchTerm}'.</p>}
     </div>
   );
 
@@ -75,14 +75,14 @@ export default function LegalReferencePage() {
     <main>
       <Card>
         <CardHeader>
-          <CardTitle className="flex items-center gap-3 text-2xl">
+          <CardTitle className="flex items-center gap-[var(--space-md)] text-2xl">
             📘 Legal Reference Database
           </CardTitle>
            <CardDescription>Search the Constitution of India & Indian Penal Code (IPC).</CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="ipc" className="w-full" onValueChange={setActiveTab}>
-            <div className="flex flex-col sm:flex-row gap-4 justify-between items-center mb-6">
+            <div className="flex flex-col sm:flex-row gap-[var(--space-lg)] justify-between items-center mb-[var(--space-2xl)]">
               <TabsList className="grid grid-cols-2 sm:grid-cols-5 w-full sm:w-auto">
                 <TabsTrigger value="ipc">IPC</TabsTrigger>
                 <TabsTrigger value="articles">Articles</TabsTrigger>
@@ -90,16 +90,16 @@ export default function LegalReferencePage() {
                 <TabsTrigger value="schedules">Schedules</TabsTrigger>
                 <TabsTrigger value="amendments">Amendments</TabsTrigger>
               </TabsList>
-               <div className="w-full sm:w-auto sm:max-w-xs flex gap-2">
+               <div className="w-full sm:w-auto sm:max-w-xs flex gap-[var(--space-sm)]">
                  <Input
                     type="text"
                     placeholder={searchPlaceholders[activeTab]}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                    className="bg-transparent"
+                    className="bg-transparent transition-all duration-150 ease-out"
                  />
-                 <Button onClick={handleSearch}><Search className="h-4 w-4"/></Button>
+                 <Button onClick={handleSearch} className="transition-all duration-150 ease-out cursor-pointer"><Search className="h-4 w-4"/></Button>
               </div>
             </div>
             

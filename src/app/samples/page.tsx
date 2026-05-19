@@ -72,11 +72,11 @@ export default function SamplesPage() {
             Use these sample agreements to test LegiFlow's analysis capabilities. Click to generate and view.
           </CardDescription>
         </CardHeader>
-        <CardContent className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <CardContent className="grid gap-[var(--space-2xl)] md:grid-cols-2 lg:grid-cols-3">
           {samples.map((sample, index) => (
-            <Card key={index} className="flex flex-col">
+            <Card key={index} className="flex flex-col cursor-pointer transition-all duration-150 ease-out hover:bg-card">
               <CardHeader>
-                <CardTitle className="text-lg flex items-center gap-2">
+                <CardTitle className="text-lg flex items-center gap-[var(--space-sm)]">
                     <FileText className="w-5 h-5 text-ring" />
                     {sample.title}
                 </CardTitle>
@@ -86,7 +86,7 @@ export default function SamplesPage() {
                   <DialogTrigger asChild>
                     <Button 
                       variant="outline" 
-                      className="w-full" 
+                      className="w-full transition-all duration-150 ease-out cursor-pointer" 
                       onClick={() => handleGenerateSample(sample.title)}
                     >
                       Use this Sample
@@ -99,7 +99,7 @@ export default function SamplesPage() {
                         This is an AI-generated sample document. It is not legal advice.
                       </DialogDescription>
                     </DialogHeader>
-                    <ScrollArea className="h-full w-full rounded-md border p-4">
+                    <ScrollArea className="h-full w-full rounded border p-[var(--space-lg)]">
                       {isGenerating ? (
                         <div className="flex items-center justify-center h-full">
                           <LoaderCircle className="w-10 h-10 animate-spin text-ring" />

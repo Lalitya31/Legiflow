@@ -91,7 +91,7 @@ export default function LoginPage() {
                     <TabsTrigger value="signin">Sign In</TabsTrigger>
                     <TabsTrigger value="signup">Sign Up</TabsTrigger>
                 </TabsList>
-                <TabsContent value="signin" className="space-y-4 pt-4">
+                <TabsContent value="signin" className="space-y-[var(--space-lg)] pt-[var(--space-lg)]">
                     <div className="relative">
                         <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                         <Input
@@ -99,7 +99,7 @@ export default function LoginPage() {
                             placeholder="Email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="pl-10"
+                            className="pl-10 transition-all duration-150 ease-out"
                             disabled={isProcessing}
                         />
                     </div>

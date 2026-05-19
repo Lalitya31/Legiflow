@@ -65,9 +65,9 @@ export function RiskView({ documentText }: RiskViewProps) {
                 <CardTitle>Risk &amp; Obligation Analysis</CardTitle>
                 <CardDescription>Potential risks and obligations identified in your document.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-[var(--space-md)]">
                 {[...Array(5)].map((_, i) => (
-                    <div key={i} className="p-4 border border-border/50 rounded-lg space-y-2">
+                    <div key={i} className="p-[var(--space-md)] border border-border/50 rounded space-y-[var(--space-sm)]">
                         <Skeleton className="h-4 w-3/4" />
                         <Skeleton className="h-4 w-full" />
                     </div>
@@ -95,24 +95,24 @@ export function RiskView({ documentText }: RiskViewProps) {
             return (
               <AccordionItem value={`risk-${index}`} key={index} className="border-border/50">
                 <AccordionTrigger className="hover:no-underline">
-                  <div className="flex justify-between items-start w-full pr-4 gap-4">
+                  <div className="flex justify-between items-start w-full pr-[var(--space-md)] gap-[var(--space-lg)]">
                       <p className="flex-1 text-left text-sm font-normal text-muted-foreground">
                         {item.clause}
                       </p>
                       <Badge variant={config.badgeVariant} className={`${config.badgeClass} flex-shrink-0`}>
-                        <Icon className="h-4 w-4 mr-1" />
+                        <Icon className="h-4 w-4 mr-[var(--space-xs)]" />
                         {item.riskLevel}
                       </Badge>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="space-y-4 p-4 bg-muted/20 rounded-b-md">
+                <AccordionContent className="space-y-[var(--space-md)] p-[var(--space-md)] bg-muted/20 rounded-b">
                     <div>
-                        <h4 className="font-semibold mb-1">Explanation:</h4>
+                        <h4 className="font-semibold mb-[var(--space-xs)]">Explanation:</h4>
                         <p className="text-sm text-muted-foreground">{item.explanation}</p>
                     </div>
                     {item.obligation && item.obligation.trim() && (
                          <div>
-                            <h4 className="font-semibold mb-1">Obligation:</h4>
+                            <h4 className="font-semibold mb-[var(--space-xs)]">Obligation:</h4>
                             <p className="text-sm text-muted-foreground">{item.obligation}</p>
                         </div>
                     )}

@@ -13,7 +13,7 @@ interface KeyInfoViewProps {
 
 const InfoCard = ({ title, icon, children }: { title: string; icon: React.ReactNode, children: React.ReactNode }) => (
     <Card className="glass-card">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-[var(--space-sm)]">
             <CardTitle className="text-sm font-medium">{title}</CardTitle>
             {icon}
         </CardHeader>
@@ -47,7 +47,7 @@ export function KeyInfoView({ documentText }: KeyInfoViewProps) {
 
   if (isLoading) {
     return (
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-[var(--space-lg)] md:grid-cols-2">
             {[...Array(4)].map((_, i) => (
                 <Card key={i} className="glass-card">
                     <CardHeader><Skeleton className="h-6 w-1/2" /></CardHeader>
@@ -63,14 +63,14 @@ export function KeyInfoView({ documentText }: KeyInfoViewProps) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-[var(--space-2xl)]">
         <InfoCard title="Timeline" icon={<CalendarDays className="h-4 w-4 text-muted-foreground" />} >
             {keyInfo.timeline.length > 0 ? (
-                <ul className="space-y-4">
+                <ul className="space-y-[var(--space-lg)]">
                     {keyInfo.timeline.map((item, index) => (
-                        <li key={index} className="flex items-start gap-4">
+                        <li key={index} className="flex items-start gap-[var(--space-lg)]">
                            <div className="flex-shrink-0 w-28 font-semibold text-accent">{item.date}</div>
-                           <div className="relative flex-1 pb-4">
+                           <div className="relative flex-1 pb-[var(--space-lg)]">
                             <span className="absolute top-1 left-[-25px] h-full w-px bg-border"></span>
                             <span className="absolute top-1 left-[-29px] h-3 w-3 rounded-full bg-accent"></span>
                                 <p className="text-sm">{item.description}</p>
@@ -81,12 +81,12 @@ export function KeyInfoView({ documentText }: KeyInfoViewProps) {
             ) : <p className="text-sm text-muted-foreground">No timeline events found.</p>}
         </InfoCard>
     
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-[var(--space-2xl)] md:grid-cols-3">
             <InfoCard title="Key Terms" icon={<FileText className="h-4 w-4 text-muted-foreground" />}>
                 {keyInfo.keyTerms.length > 0 ? (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-[var(--space-sm)]">
                         {keyInfo.keyTerms.map((term, index) => (
-                            <p key={index} className="text-sm px-2 py-1 bg-secondary/50 rounded-md">{term}</p>
+                            <p key={index} className="text-sm px-[var(--space-sm)] py-[var(--space-xs)] bg-secondary/50 rounded">{term}</p>
                         ))}
                     </div>
                 ) : <p className="text-sm text-muted-foreground">No key terms found.</p>}
@@ -94,7 +94,7 @@ export function KeyInfoView({ documentText }: KeyInfoViewProps) {
 
             <InfoCard title="Parties Involved" icon={<Users className="h-4 w-4 text-muted-foreground" />}>
                  {keyInfo.parties.length > 0 ? (
-                    <ul className="list-disc list-inside space-y-1">
+                    <ul className="list-disc list-inside space-y-[var(--space-xs)]">
                         {keyInfo.parties.map((party, index) => (
                             <li key={index} className="text-sm">{party}</li>
                         ))}
@@ -104,7 +104,7 @@ export function KeyInfoView({ documentText }: KeyInfoViewProps) {
             
             <InfoCard title="Financial Amounts" icon={<CircleDollarSign className="h-4 w-4 text-muted-foreground" />}>
                  {keyInfo.financialAmounts.length > 0 ? (
-                    <ul className="list-disc list-inside space-y-1">
+                    <ul className="list-disc list-inside space-y-[var(--space-xs)]">
                         {keyInfo.financialAmounts.map((amount, index) => (
                             <li key={index} className="text-sm font-mono">{amount}</li>
                         ))}

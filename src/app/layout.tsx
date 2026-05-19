@@ -116,32 +116,32 @@ function AppHeader() {
     const pageTitle = navItems.find(item => pathname.startsWith(item.href))?.label || 'LegiFlow';
 
     return (
-        <header className="fixed left-0 right-0 top-0 h-13 flex items-center justify-between px-5 z-30 backdrop-blur-md bg-background/30">
-            <div className="flex flex-col gap-[var(--space-sm)]">
+        <header className="fixed left-0 right-0 top-0 h-13 flex items-center justify-between px-[var(--space-lg)] z-30 backdrop-blur-md bg-background/30">
+            <div className="flex flex-col gap-[var(--space-xs)]">
                 <h1 className="font-serif text-[40px] font-normal leading-[1.15] tracking-[-0.02em]">{pageTitle}</h1>
-                <p className="text-muted">One line description beneath it</p>
+                <p className="text-muted text-sm">One line description beneath it</p>
             </div>
             <div className="flex items-center gap-5">
-                <button className="hover:bg-foreground/10 p-2 rounded-full">
+                <button className="hover:bg-card p-[var(--space-sm)] rounded text-foreground transition-all duration-150 ease-out cursor-pointer">
                     <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M15 11a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
                 </button>
-                <button onClick={toggleTheme} className="hover:bg-foreground/10 p-2 rounded-full">
+                <button onClick={toggleTheme} className="hover:bg-card p-[var(--space-sm)] rounded text-foreground transition-all duration-150 ease-out cursor-pointer">
                     {theme === 'dark' ? '🌙' : '☀️'}
                 </button>
-                <button className="hover:bg-foreground/10 p-2 rounded-full">
+                <button className="hover:bg-card p-[var(--space-sm)] rounded text-foreground transition-all duration-150 ease-out cursor-pointer">
                     <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M12 4h.01"></path>
                     </svg>
                 </button>
-                <button className="hover:bg-foreground/10 p-2 rounded-full">
+                <button className="hover:bg-card p-[var(--space-sm)] rounded text-foreground transition-all duration-150 ease-out cursor-pointer">
                     <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M12 4h.01"></path>
                     </svg>
                 </button>
-                <div className="w-7 h-7 bg-secondary text-primary flex items-center justify-center rounded-full">LL</div>
-                <button className="hover:bg-foreground/10 p-2 rounded-full">
+                <div className="w-7 h-7 bg-secondary text-primary flex items-center justify-center rounded text-sm font-medium">LL</div>
+                <button className="hover:bg-card p-[var(--space-sm)] rounded text-foreground transition-all duration-150 ease-out cursor-pointer">
                     <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H3"></path>
                     </svg>
@@ -158,15 +158,15 @@ function AppLayout({ children }: { children: React.ReactNode }) {
         <div className="min-h-screen flex text-foreground relative">
             <AppHeader />
             <div className="flex mt-13 h-[calc(100vh-52px)] w-full">
-                <aside className="w-64 flex-col fixed h-full p-3 bg-gradient-to-b from-card/60 to-card/20 border-r border-border/50">
+                <aside className="w-64 flex-col fixed h-full p-[var(--space-sm)] bg-gradient-to-b from-card/60 to-card/20 border-r border-border/50">
                     <nav className="flex-grow space-y-1">
                         {navItems.map((item) => (
                             <Link
                                 key={item.href}
                                 href={item.href}
-                                className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                                className={`flex items-center gap-[var(--space-md)] px-[var(--space-md)] py-[var(--space-sm)] rounded text-sm font-medium transition-all duration-150 ease-out cursor-pointer ${
                                     pathname === item.href
-                                        ? 'bg-gradient-to-r from-sky-500/10 to-purple-500/10 text-accent-foreground'
+                                        ? 'bg-accent/10 text-accent-foreground'
                                         : 'text-muted-foreground hover:bg-card hover:text-foreground'
                                 }`}
                             >
@@ -176,7 +176,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
                         ))}
                     </nav>
                 </aside>
-                <main className="flex-1 ml-64 p-7 overflow-y-auto">
+                <main className="flex-1 ml-64 p-[var(--space-lg)] overflow-y-auto">
                     {children}
                 </main>
             </div>

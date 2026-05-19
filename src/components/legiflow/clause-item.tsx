@@ -42,23 +42,23 @@ export function ClauseItem({ clause, index }: ClauseItemProps) {
 
   return (
     <AccordionItem value={`item-${index}`} className="border-border/50">
-      <AccordionTrigger onClick={handleSimplify} className="text-left hover:no-underline">
-        <div className="flex gap-4 items-start w-full">
+      <AccordionTrigger onClick={handleSimplify} className="text-left hover:no-underline cursor-pointer">
+        <div className="flex gap-[var(--space-lg)] items-start w-full">
             <span className="text-accent font-bold">{index + 1}.</span>
             <p className="flex-1 text-muted-foreground">
                 {clause.length > 150 ? `${clause.substring(0, 150)}...` : clause}
             </p>
         </div>
       </AccordionTrigger>
-      <AccordionContent className="px-2">
+      <AccordionContent className="px-[var(--space-sm)]">
         <Tabs defaultValue="simplified" className="w-full">
           <TabsList>
             <TabsTrigger value="simplified">Simplified Version</TabsTrigger>
             <TabsTrigger value="legal">Original Legal Text</TabsTrigger>
           </TabsList>
-          <TabsContent value="simplified" className="mt-4 p-4 bg-primary/5 rounded-md border border-primary/20">
+          <TabsContent value="simplified" className="mt-[var(--space-lg)] p-[var(--space-lg)] bg-primary/5 rounded border border-primary/20">
             {isSimplifying ? (
-              <div className="space-y-2">
+              <div className="space-y-[var(--space-sm)]">
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-3/4" />
@@ -66,12 +66,12 @@ export function ClauseItem({ clause, index }: ClauseItemProps) {
             ) : summary ? (
               <p className="text-foreground whitespace-pre-wrap">{summary}</p>
             ) : (
-                <div className="text-center py-4 text-muted-foreground">
+                <div className="text-center py-[var(--space-lg)] text-muted-foreground">
                     <p>Click the clause header to generate a simplified summary.</p>
                 </div>
             )}
           </TabsContent>
-          <TabsContent value="legal" className="mt-4 p-4 bg-muted/50 rounded-md border">
+          <TabsContent value="legal" className="mt-[var(--space-lg)] p-[var(--space-lg)] bg-muted/50 rounded border">
             <p className="text-sm text-muted-foreground whitespace-pre-wrap">{clause}</p>
           </TabsContent>
         </Tabs>

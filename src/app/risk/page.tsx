@@ -33,12 +33,12 @@ const riskStyles: { [key: string]: { badgeVariant: 'destructive' | 'default' | '
     Medium: {
         badgeVariant: 'default',
         icon: ShieldHalf,
-        className: 'bg-amber-500 text-black hover:bg-amber-600',
+        className: 'bg-warning text-warning-foreground hover:bg-warning/90 transition-all duration-150 ease-out cursor-pointer',
     },
     Safe: {
         badgeVariant: 'secondary',
         icon: ShieldCheck,
-        className: 'bg-green-500 text-white hover:bg-green-600',
+        className: 'bg-success text-success-foreground hover:bg-success/90 transition-all duration-150 ease-out cursor-pointer',
     }
 }
 

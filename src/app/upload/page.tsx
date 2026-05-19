@@ -15,10 +15,10 @@ export default function UploadPage() {
                 <hr className="border-border-subtle" />
 
                 {/* Dropzone */}
-                <div className="border-2 border-dashed border-border-subtle rounded-lg p-[var(--space-lg)] text-center">
+                <div className="border-2 border-dashed border-border-subtle rounded p-[var(--space-lg)] text-center transition-all duration-150 ease-out cursor-pointer hover:bg-card/50">
                     <p className="text-sm text-muted">Drag & drop your file here</p>
                     <p className="text-sm">
-                        or <a href="#" className="underline text-primary">browse files</a>
+                        or <a href="#" className="underline text-primary cursor-pointer hover:text-primary/80 transition-colors duration-150 ease-out">browse files</a>
                     </p>
                     <p className="text-xs text-muted mt-[var(--space-sm)]">Supported: PDF, DOCX, TXT</p>
                 </div>
@@ -32,13 +32,13 @@ export default function UploadPage() {
 
                 {/* Textarea */}
                 <textarea
-                    className="w-full h-[200px] border border-border-subtle rounded-lg p-[var(--space-sm)] text-sm"
+                    className="w-full h-[200px] border border-border-subtle rounded p-[var(--space-sm)] text-sm transition-all duration-150 ease-out focus:border-primary focus:outline-none"
                     placeholder="Paste document text here..."
                 ></textarea>
 
                 {/* Analyze Button */}
                 <div className="text-right">
-                    <button className="bg-primary text-primary-foreground px-4 py-2 rounded">
+                    <button className="bg-primary text-primary-foreground px-[var(--space-md)] py-[var(--space-sm)] rounded transition-all duration-150 ease-out cursor-pointer hover:bg-primary/90">
                         Analyze Document
                     </button>
                 </div>

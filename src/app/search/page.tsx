@@ -51,20 +51,20 @@ export default function SearchPage() {
                         <CardDescription>Find specific clauses within any legal document.</CardDescription>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid md:grid-cols-2 gap-6">
+                        <div className="grid md:grid-cols-2 gap-[var(--space-2xl)]">
                             <div>
-                                <h3 className="font-semibold mb-2">Document Text</h3>
+                                <h3 className="font-semibold mb-[var(--space-sm)]">Document Text</h3>
                                 <Textarea
                                     placeholder="Paste the full text of the legal document here..."
                                     value={documentText}
                                     onChange={(e) => setDocumentText(e.target.value)}
-                                    className="min-h-80 text-sm bg-background/80"
+                                    className="min-h-80 text-sm bg-background/80 transition-all duration-150 ease-out"
                                     disabled={isSearching}
                                 />
                             </div>
                              <div>
-                                <h3 className="font-semibold mb-2">Search Query & Results</h3>
-                               <div className="flex items-center gap-2 mb-4">
+                                <h3 className="font-semibold mb-[var(--space-sm)]">Search Query & Results</h3>
+                               <div className="flex items-center gap-[var(--space-sm)] mb-[var(--space-lg)]">
                                     <Input 
                                         type="text" 
                                         placeholder="e.g. 'Termination for cause'" 
@@ -72,25 +72,26 @@ export default function SearchPage() {
                                         onChange={(e) => setQuery(e.target.value)}
                                         onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
                                         disabled={isSearching}
+                                        className="transition-all duration-150 ease-out"
                                     />
-                                    <Button onClick={handleSearch} disabled={isSearching}>
+                                    <Button onClick={handleSearch} disabled={isSearching} className="transition-all duration-150 ease-out cursor-pointer">
                                         {isSearching ? <LoaderCircle className="animate-spin" /> : <Search />}
                                         <span className="ml-2 hidden sm:inline">Search</span>
                                     </Button>
                                 </div>
-                                <div className="space-y-4 h-80 overflow-y-auto pr-2 border rounded-lg p-4 bg-muted/40">
+                                <div className="space-y-[var(--space-lg)] h-80 overflow-y-auto pr-[var(--space-sm)] border rounded p-[var(--space-lg)] bg-muted/40">
                                     {isSearching ? (
                                         <div className="flex items-center justify-center h-full">
                                             <LoaderCircle className="w-8 h-8 animate-spin text-ring" />
                                         </div>
                                     ) : results.length > 0 ? (
                                         results.map((clause, index) => (
-                                            <Card key={index} className="p-4 bg-background">
+                                            <Card key={index} className="p-[var(--space-lg)] bg-background cursor-pointer transition-all duration-150 ease-out hover:bg-card">
                                                 <p className="text-sm">{clause}</p>
                                             </Card>
                                         ))
                                     ) : (
-                                        <div className="text-center text-muted-foreground pt-10">
+                                        <div className="text-center text-muted-foreground pt-[var(--space-2xl)]">
                                             <p>Results will be displayed here.</p>
                                         </div>
                                     )}

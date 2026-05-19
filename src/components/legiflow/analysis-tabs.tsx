@@ -16,8 +16,8 @@ interface AnalysisTabsProps {
 
 export function AnalysisTabs({ documentText, clauses, onReset }: AnalysisTabsProps) {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-4">
+    <div className="space-y-[var(--space-2xl)]">
+      <div className="flex items-center gap-[var(--space-lg)]">
         <Button variant="ghost" size="icon" onClick={onReset}>
           <ArrowLeft className="h-4 w-4" />
           <span className="sr-only">Back</span>
@@ -31,16 +31,16 @@ export function AnalysisTabs({ documentText, clauses, onReset }: AnalysisTabsPro
           <TabsTrigger value="key-info">Key Info</TabsTrigger>
           <TabsTrigger value="qa">Q&A</TabsTrigger>
         </TabsList>
-        <TabsContent value="summary" className="mt-6">
+        <TabsContent value="summary" className="mt-[var(--space-2xl)]">
           <SummaryView clauses={clauses} />
         </TabsContent>
-        <TabsContent value="risks" className="mt-6">
+        <TabsContent value="risks" className="mt-[var(--space-2xl)]">
           <RiskView documentText={documentText} />
         </TabsContent>
-        <TabsContent value="key-info" className="mt-6">
+        <TabsContent value="key-info" className="mt-[var(--space-2xl)]">
           <KeyInfoView documentText={documentText} />
         </TabsContent>
-        <TabsContent value="qa" className="mt-6">
+        <TabsContent value="qa" className="mt-[var(--space-2xl)]">
           <QaView documentText={documentText} />
         </TabsContent>
       </Tabs>

@@ -66,29 +66,29 @@ export function QaView({ documentText }: QaViewProps) {
                 <CardDescription>Ask specific questions about your document.</CardDescription>
             </CardHeader>
             <CardContent className="flex-grow overflow-hidden">
-                <ScrollArea className="h-full pr-4" ref={scrollAreaRef}>
-                    <div className="space-y-6">
+                <ScrollArea className="h-full pr-[var(--space-md)]" ref={scrollAreaRef}>
+                    <div className="space-y-[var(--space-2xl)]">
                         {messages.length === 0 ? (
-                            <div className="text-center text-muted-foreground py-10">
-                                <Bot className="mx-auto h-12 w-12 mb-4" />
+                            <div className="text-center text-muted-foreground py-[var(--space-2xl)]">
+                                <Bot className="mx-auto h-12 w-12 mb-[var(--space-lg)]" />
                                 <p>I'm ready to answer your questions.</p>
                                 <p className="text-sm">e.g., "What is the penalty for early termination?"</p>
                             </div>
                         ) : (
                              messages.map((msg, index) => (
-                                <div key={index} className={`flex items-start gap-3 ${msg.sender === 'user' ? 'justify-end' : ''}`}>
-                                    {msg.sender === 'bot' && <div className="p-2 bg-primary rounded-full text-primary-foreground"><Bot className="h-5 w-5 flex-shrink-0" /></div>}
-                                    <div className={`p-3 rounded-lg max-w-[80%] ${msg.sender === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}>
+                                <div key={index} className={`flex items-start gap-[var(--space-md)] ${msg.sender === 'user' ? 'justify-end' : ''}`}>
+                                    {msg.sender === 'bot' && <div className="p-[var(--space-sm)] bg-primary rounded text-primary-foreground"><Bot className="h-5 w-5 flex-shrink-0" /></div>}
+                                    <div className={`p-[var(--space-md)] rounded max-w-[80%] ${msg.sender === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}>
                                         {msg.content}
                                     </div>
-                                    {msg.sender === 'user' && <div className="p-2 bg-muted rounded-full text-foreground"><User className="h-5 w-5 flex-shrink-0" /></div>}
+                                    {msg.sender === 'user' && <div className="p-[var(--space-sm)] bg-muted rounded text-foreground"><User className="h-5 w-5 flex-shrink-0" /></div>}
                                 </div>
                             ))
                         )}
                         {isAnswering && (
-                             <div className="flex items-start gap-3">
-                                <div className="p-2 bg-primary rounded-full text-primary-foreground"><Bot className="h-5 w-5 flex-shrink-0" /></div>
-                                <div className="p-3 rounded-lg bg-muted">
+                             <div className="flex items-start gap-[var(--space-md)]">
+                                <div className="p-[var(--space-sm)] bg-primary rounded text-primary-foreground"><Bot className="h-5 w-5 flex-shrink-0" /></div>
+                                <div className="p-[var(--space-md)] rounded bg-muted">
                                     <LoaderCircle className="h-5 w-5 animate-spin" />
                                 </div>
                             </div>
@@ -96,8 +96,8 @@ export function QaView({ documentText }: QaViewProps) {
                     </div>
                 </ScrollArea>
             </CardContent>
-            <CardFooter className="border-t pt-6">
-                 <div className="flex w-full items-center space-x-2">
+            <CardFooter className="border-t pt-[var(--space-lg)]">
+                 <div className="flex w-full items-center gap-[var(--space-sm)]">
                     <Input
                         type="text"
                         placeholder="e.g., 'What happens if I pay rent late?'"
@@ -118,10 +118,10 @@ export function QaView({ documentText }: QaViewProps) {
 }
 
 const BotAnswer = ({ result }: { result: AnswerContractQuestionOutput }) => (
-    <div className="space-y-4 text-sm">
+    <div className="space-y-[var(--space-md)] text-sm">
         <p>{result.answer}</p>
         <div>
-            <div className="flex justify-between items-center mb-1">
+            <div className="flex justify-between items-center mb-[var(--space-xs)]">
                 <h4 className="text-xs font-semibold uppercase text-muted-foreground">Confidence</h4>
                 <span className="text-sm font-medium">{Math.round(result.confidence * 100)}%</span>
             </div>
@@ -129,10 +129,10 @@ const BotAnswer = ({ result }: { result: AnswerContractQuestionOutput }) => (
         </div>
         {result.sources && result.sources.length > 0 && (
             <div>
-                <h4 className="text-xs font-semibold uppercase text-muted-foreground mb-2 flex items-center gap-2"><FileText className="h-4 w-4" /> Sources</h4>
-                <div className="space-y-2">
+                <h4 className="text-xs font-semibold uppercase text-muted-foreground mb-[var(--space-md)] flex items-center gap-[var(--space-sm)]"><FileText className="h-4 w-4" /> Sources</h4>
+                <div className="space-y-[var(--space-md)]">
                     {result.sources.map((source, i) => (
-                        <p key={i} className="text-xs p-2 bg-background/50 border rounded-md text-muted-foreground italic">"{source}"</p>
+                        <p key={i} className="text-xs p-[var(--space-sm)] bg-background/50 border rounded text-muted-foreground italic">"{source}"</p>
                     ))}
                 </div>
             </div>

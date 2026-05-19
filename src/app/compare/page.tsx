@@ -31,9 +31,9 @@ function computeDiffs(a: Agreement, b: Agreement): Diff[] {
 
 // --- Sub-components ---
 const severityStyles: Record<Diff['severity'], string> = {
-  high: 'bg-red-500/10 border-red-500/30 text-red-400',
-  medium: 'bg-amber-500/10 border-amber-500/30 text-amber-400',
-  low: 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400',
+  high: 'bg-destructive/10 border-destructive/30 text-destructive',
+  medium: 'bg-warning/10 border-warning/30 text-warning',
+  low: 'bg-success/10 border-success/30 text-success',
 };
 
 const severityLabel: Record<Diff['severity'], string> = {
@@ -73,13 +73,13 @@ function DropZone({
     <motion.label
       htmlFor={`upload-${agreement.id}`}
       className={`
-        relative flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed
-        p-6 cursor-pointer transition-all duration-200 select-none
+        relative flex flex-col items-center justify-center gap-[var(--space-sm)] rounded border-2 border-dashed
+        p-[var(--space-lg)] cursor-pointer transition-all duration-150 ease-out select-none
         ${dragging
-          ? 'border-indigo-400 bg-indigo-500/10 scale-[1.02]'
+          ? 'border-primary/60 bg-primary/10 scale-[1.02]'
           : agreement.file
-          ? 'border-indigo-500/50 bg-indigo-500/5'
-          : 'border-zinc-700 bg-zinc-900/50 hover:border-zinc-500 hover:bg-zinc-800/50'
+          ? 'border-primary/50 bg-primary/5'
+          : 'border-border bg-card/50 hover:border-border hover:bg-card'
         }
       `}
       onDragOver={(e) => { e.preventDefault(); setDragging(true); }}
@@ -99,15 +99,15 @@ function DropZone({
       <span className="text-2xl">{agreement.file ? '📄' : '📂'}</span>
 
       <div className="text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500 mb-1">
+        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-[var(--space-xs)]">
           Agreement {agreement.id}
         </p>
         {agreement.file ? (
-          <p className="text-sm font-medium text-indigo-300 truncate max-w-[180px]">
+          <p className="text-sm font-medium text-primary truncate max-w-[180px]">
             {agreement.file.name}
           </p>
         ) : (
-          <p className="text-sm text-zinc-400">Drop file or click to upload</p>
+          <p className="text-sm text-muted-foreground">Drop file or click to upload</p>
         )}
       </div>
 
@@ -115,7 +115,7 @@ function DropZone({
         <motion.span
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          className="absolute top-2 right-2 text-xs bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 px-2 py-0.5 rounded-full"
+          className="absolute top-[var(--space-sm)] right-[var(--space-sm)] text-xs bg-primary/20 text-primary border border-primary/30 px-[var(--space-sm)] py-[var(--space-xs)] rounded transition-all duration-150 ease-out"
         >
           Ready
         </motion.span>
@@ -130,7 +130,7 @@ function DiffCard({ diff, index }: { diff: Diff; index: number }) {
       initial={{ opacity: 0, x: -12 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.07 }}
-      className={`rounded-lg border p-4 ${severityStyles[diff.severity]}`}
+      className={`rounded border p-[var(--space-lg)] ${severityStyles[diff.severity]}`}
     >
       <div className="flex items-start justify-between gap-3">
         <p className="text-sm font-semibold text-white">{diff.clause}</p>
@@ -173,25 +173,25 @@ export default function ComparePage() {
   const canCompare = !!agreements.A.file && !!agreements.B.file;
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-zinc-100 p-6 md:p-10 font-sans">
+    <main className="min-h-screen bg-background text-foreground p-[var(--space-lg)] md:p-[var(--space-2xl)] font-sans">
       <motion.div
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="max-w-3xl mx-auto space-y-6"
+        className="max-w-3xl mx-auto space-y-[var(--space-2xl)]"
       >
         {/* Header */}
-        <Card className="bg-zinc-900 border-zinc-800">
+        <Card className="bg-card border-border">
           <CardHeader>
-            <CardTitle className="text-xl flex items-center gap-2">
+            <CardTitle className="text-xl flex items-center gap-[var(--space-sm)]">
               <span>📑</span> Compare Agreements
             </CardTitle>
-            <CardDescription className="text-zinc-400">
+            <CardDescription className="text-muted-foreground">
               Upload two agreements to instantly surface clause-level differences.
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-[var(--space-lg)]">
             {/* Drop zones */}
             <div className="grid md:grid-cols-2 gap-4">
               <DropZone agreement={agreements.A} onFile={handleFile} />
@@ -205,10 +205,10 @@ export default function ComparePage() {
               whileHover={canCompare && !loading ? { scale: 1.02 } : {}}
               whileTap={canCompare && !loading ? { scale: 0.98 } : {}}
               className={`
-                w-full py-2.5 rounded-lg text-sm font-semibold tracking-wide transition-all duration-200
+                w-full py-[var(--space-sm)] rounded text-sm font-semibold tracking-wide transition-all duration-150 ease-out cursor-pointer
                 ${canCompare && !loading
-                  ? 'bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/40'
-                  : 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
+                  ? 'bg-primary hover:bg-primary/90 text-primary-foreground'
+                  : 'bg-muted text-muted-foreground cursor-not-allowed'
                 }
               `}
             >
@@ -240,18 +240,18 @@ export default function ComparePage() {
               exit={{ opacity: 0, y: 10 }}
               transition={{ duration: 0.35 }}
             >
-              <Card className="bg-zinc-900 border-zinc-800">
-                <CardHeader className="pb-2">
+              <Card className="bg-card border-border">
+                <CardHeader className="pb-[var(--space-sm)]">
                   <CardTitle className="text-base flex items-center justify-between">
                     <span>🔍 Differences Found</span>
-                    <span className="text-xs font-normal text-zinc-400 bg-zinc-800 px-2 py-1 rounded-full">
+                    <span className="text-xs font-normal text-muted-foreground bg-muted px-[var(--space-sm)] py-[var(--space-xs)] rounded transition-all duration-150 ease-out">
                       {diffs.length} issue{diffs.length !== 1 ? 's' : ''}
                     </span>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
+                <CardContent className="space-y-[var(--space-md)]">
                   {diffs.length === 0 ? (
-                    <p className="text-sm text-zinc-400 text-center py-6">
+                    <p className="text-sm text-muted-foreground text-center py-[var(--space-2xl)]">
                       ✅ No differences found — agreements are identical.
                     </p>
                   ) : (

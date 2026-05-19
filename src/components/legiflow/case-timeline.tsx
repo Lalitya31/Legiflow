@@ -18,7 +18,7 @@ export function CaseTimeline({ cases }: CaseTimelineProps) {
                 <CardHeader>
                     <CardTitle>Case Progress</CardTitle>
                 </CardHeader>
-                <CardContent className="py-10 text-center text-muted-foreground">
+                <CardContent className="py-[var(--space-2xl)] text-center text-muted-foreground">
                     No cases available for tracking.
                 </CardContent>
             </Card>
@@ -31,14 +31,14 @@ export function CaseTimeline({ cases }: CaseTimelineProps) {
                 <CardTitle>Detailed Case Tracking</CardTitle>
             </CardHeader>
             <CardContent>
-                <ScrollArea className="h-[400px] pr-4">
-                    <div className="space-y-6">
+                <ScrollArea className="h-[400px] pr-[var(--space-md)]">
+                    <div className="space-y-[var(--space-2xl)]">
                         {cases.map((record) => (
-                            <div key={record.id} className="p-4 border rounded-lg bg-card/50">
-                                <div className="flex flex-col md:flex-row justify-between mb-4 gap-2 md:gap-0">
+                            <div key={record.id} className="p-[var(--space-lg)] border rounded bg-card/50 cursor-pointer transition-all duration-150 ease-out hover:bg-card">
+                                <div className="flex flex-col md:flex-row justify-between mb-[var(--space-lg)] gap-[var(--space-sm)] md:gap-0">
                                     <div>
                                         <h4 className="font-semibold">{record.title}</h4>
-                                        <div className="flex gap-2 mt-1">
+                                        <div className="flex gap-[var(--space-sm)] mt-[var(--space-xs)]">
                                             <Badge variant="outline" className="text-xs">{record.id}</Badge>
                                             <Badge variant={record.status === 'Open' ? 'default' : record.status === 'Closed' ? 'secondary' : 'destructive'} className="text-xs">
                                                 {record.status}
@@ -46,20 +46,20 @@ export function CaseTimeline({ cases }: CaseTimelineProps) {
                                         </div>
                                     </div>
                                     <div className="text-right flex flex-col justify-center">
-                                        <div className="text-sm font-medium mb-1">{record.progress}% Completed</div>
+                                        <div className="text-sm font-medium mb-[var(--space-xs)]">{record.progress}% Completed</div>
                                         <Progress value={record.progress} className="w-[120px] h-2" />
                                     </div>
                                 </div>
 
                                 {/* Timeline Stepper */}
-                                <div className="relative pt-2">
+                                <div className="relative pt-[var(--space-sm)]">
                                     {/* Timeline line */}
                                     <div className="absolute top-[18px] left-[14px] right-[14px] h-[2px] bg-muted z-0 hidden md:block"></div>
                                     
-                                    <div className="flex flex-col md:flex-row justify-between gap-4 relative z-10">
+                                    <div className="flex flex-col md:flex-row justify-between gap-[var(--space-lg)] relative z-10">
                                         {record.milestones.map((milestone, idx) => (
-                                            <div key={idx} className="flex md:flex-col items-center gap-3 md:gap-2 text-center group">
-                                                <div className={`w-7 h-7 rounded-full flex items-center justify-center bg-background border-2 ${milestone.completed ? 'border-primary text-primary' : 'border-muted-foreground text-muted-foreground'} transition-colors`}>
+                                            <div key={idx} className="flex md:flex-col items-center gap-[var(--space-md)] md:gap-[var(--space-sm)] text-center group">
+                                                <div className={`w-7 h-7 rounded-full flex items-center justify-center bg-background border-2 ${milestone.completed ? 'border-primary text-primary' : 'border-muted-foreground text-muted-foreground'} transition-all duration-150 ease-out`}>
                                                     {milestone.completed ? <CheckCircle2 className="w-4 h-4" /> : <Circle className="w-3 h-3" />}
                                                 </div>
                                                 <div className="text-left md:text-center shrink-0">

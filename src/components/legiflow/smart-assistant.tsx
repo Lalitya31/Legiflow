@@ -17,8 +17,8 @@ const SUGGESTIONS = [
 ];
 
 const markdownComponents = {
-  p: ({node, ...props}: any) => <p className="mb-2 last:mb-0" {...props} />,
-  ul: ({node, ...props}: any) => <ul className="pl-4 mb-2 space-y-1 list-disc" {...props} />,
+  p: ({node, ...props}: any) => <p className="mb-[var(--space-sm)] last:mb-0" {...props} />,
+  ul: ({node, ...props}: any) => <ul className="pl-[var(--space-md)] mb-[var(--space-sm)] space-y-[var(--space-xs)] list-disc" {...props} />,
   li: ({node, ...props}: any) => <li className="marker:text-muted-foreground" {...props} />,
   strong: ({node, ...props}: any) => <strong className="font-semibold text-foreground" {...props} />
 };
@@ -88,14 +88,14 @@ export function SmartAssistant() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+    <div className="fixed bottom-[var(--space-md)] right-[var(--space-md)] z-50 flex flex-col items-end">
       {/* Chat Panel */}
       {isOpen && (
-        <Card className="w-[380px] h-[550px] mb-4 shadow-2xl flex flex-col animate-in slide-in-from-bottom-5 fade-in duration-300 border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 overflow-hidden">
+        <Card className="w-[380px] h-[550px] mb-[var(--space-md)] flex flex-col animate-in slide-in-from-bottom-5 fade-in duration-300 border-primary/20 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 overflow-hidden">
           {/* Header */}
-          <CardHeader className="p-4 border-b bg-muted/40 flex flex-row items-center justify-between space-y-0 rounded-t-xl">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+          <CardHeader className="p-[var(--space-md)] border-b bg-muted/40 flex flex-row items-center justify-between space-y-0 rounded-t">
+            <div className="flex items-center gap-[var(--space-sm)]">
+              <div className="w-8 h-8 rounded bg-primary/10 flex items-center justify-center text-primary">
                 <Sparkles className="w-4 h-4" />
               </div>
               <div>
@@ -103,27 +103,23 @@ export function SmartAssistant() {
                 <p className="text-xs text-muted-foreground leading-none">Always here to help</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-muted" onClick={toggleChat}>
+            <Button variant="ghost" size="icon" className="h-8 w-8 rounded hover:bg-muted transition-all duration-150 ease-out cursor-pointer" onClick={toggleChat}>
               <X className="w-4 h-4" />
             </Button>
           </CardHeader>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4" ref={scrollRef}>
+          <div className="flex-1 overflow-y-auto p-[var(--space-md)] space-y-[var(--space-md)]" ref={scrollRef}>
              {messages.map((msg) => (
-                <div key={msg.id} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} max-w-full space-y-1`}>
-                    <div className={`flex items-end gap-2 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                <div key={msg.id} className={`flex flex-col ${msg.role === 'user' ? 'items-end' : 'items-start'} max-w-full space-y-[var(--space-xs)]`}>
+                    <div className={`flex items-end gap-[var(--space-sm)] max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
                         {/* Avatar */}
-                        <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted border text-foreground'}`}>
+                        <div className={`flex-shrink-0 w-6 h-6 rounded flex items-center justify-center ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted border text-foreground'}`}>
                             {msg.role === 'user' ? <User className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
                         </div>
                         
                         {/* Bubble */}
-                        <div className={`p-3 rounded-2xl text-sm ${
-                            msg.role === 'user' 
-                                ? 'bg-primary text-primary-foreground rounded-br-sm' 
-                                : 'bg-muted/80 text-foreground border rounded-bl-sm prose prose-sm dark:prose-invert max-w-none'
-                        }`}>
+                        <div className={`p-[var(--space-md)] rounded text-sm ${msg.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted/80 text-foreground border prose prose-sm dark:prose-invert max-w-none'}`}>
                             {msg.role === 'user' ? (
                                 msg.content
                             ) : (
@@ -134,19 +130,19 @@ export function SmartAssistant() {
                         </div>
                     </div>
                     {/* Timestamp */}
-                    <span className="text-[10px] text-muted-foreground px-8">
+                    <span className="text-[10px] text-muted-foreground px-[var(--space-lg)]">
                         {msg.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </span>
                 </div>
              ))}
 
              {isTyping && (
-                <div className="flex flex-col items-start space-y-1">
-                    <div className="flex items-end gap-2 flex-row">
-                        <div className="flex-shrink-0 w-6 h-6 rounded-full bg-muted border text-foreground flex items-center justify-center">
+                <div className="flex flex-col items-start space-y-[var(--space-xs)]">
+                    <div className="flex items-end gap-[var(--space-sm)] flex-row">
+                        <div className="flex-shrink-0 w-6 h-6 rounded bg-muted border text-foreground flex items-center justify-center">
                             <Bot className="w-3 h-3" />
                         </div>
-                        <div className="p-4 rounded-2xl rounded-bl-sm bg-muted/80 flex gap-1 items-center h-[42px]">
+                        <div className="p-[var(--space-md)] rounded bg-muted/80 flex gap-[var(--space-xs)] items-center h-auto">
                             <span className="w-1.5 h-1.5 bg-muted-foreground/60 rounded-full animate-bounce [animation-delay:-0.3s]"></span>
                             <span className="w-1.5 h-1.5 bg-muted-foreground/60 rounded-full animate-bounce [animation-delay:-0.15s]"></span>
                             <span className="w-1.5 h-1.5 bg-muted-foreground/60 rounded-full animate-bounce"></span>
@@ -157,15 +153,15 @@ export function SmartAssistant() {
           </div>
 
           {/* Input Area */}
-          <div className="p-3 border-t bg-card/50">
+          <div className="p-[var(--space-md)] border-t bg-card/50">
             {/* Suggestions */}
             {messages.length < 3 && (
-               <div className="flex flex-nowrap overflow-x-auto gap-2 pb-3 mb-1 scrollbar-hide" style={{ scrollbarWidth: 'none' }}>
+               <div className="flex flex-nowrap overflow-x-auto gap-[var(--space-sm)] pb-[var(--space-md)] mb-[var(--space-md)] scrollbar-hide" style={{ scrollbarWidth: 'none' }}>
                   {SUGGESTIONS.map((sug, i) => (
                     <button 
                        key={i} 
                        onClick={() => handleSend(sug)}
-                       className="whitespace-nowrap px-3 py-1.5 bg-secondary/50 hover:bg-secondary text-secondary-foreground text-[11px] rounded-full transition-colors border border-border/50 font-medium"
+                       className="whitespace-nowrap px-[var(--space-md)] py-[var(--space-xs)] bg-secondary/50 hover:bg-secondary text-secondary-foreground text-xs rounded transition-all duration-150 ease-out border border-border/50 font-medium cursor-pointer"
                     >
                       {sug}
                     </button>
@@ -173,32 +169,32 @@ export function SmartAssistant() {
                </div>
             )}
             
-            <div className="flex gap-2">
+            <div className="flex gap-[var(--space-sm)]">
                <Input 
                  placeholder="Type a message..." 
                  value={inputValue}
                  onChange={(e) => setInputValue(e.target.value)}
                  onKeyDown={handleKeyDown}
-                 className="flex-1 rounded-full bg-background border-border/60 focus-visible:ring-1 focus-visible:ring-primary/50 placeholder:text-muted-foreground/70"
+                 className="flex-1 rounded bg-background border-border/60 focus-visible:ring-1 focus-visible:ring-primary/50 placeholder:text-muted-foreground/70 transition-all duration-150 ease-out"
                />
                <Button 
                  onClick={() => handleSend(inputValue)} 
                  disabled={!inputValue.trim() || isTyping}
                  size="icon"
-                 className="rounded-full shadow-sm shrink-0"
+                 className="rounded shrink-0 transition-all duration-150 ease-out cursor-pointer"
                >
                  <Send className="w-4 h-4" />
                </Button>
             </div>
           </div>
         </Card>
-      )}
+      )}}
 
       {/* Floating Toggle Button */}
       <Button 
         size="icon" 
         onClick={toggleChat}
-        className={`h-14 w-14 rounded-full shadow-xl transition-all duration-300 ${isOpen ? 'bg-muted text-foreground hover:bg-muted/80' : 'bg-primary hover:bg-primary/90 hover:scale-105'} flex items-center justify-center`}
+        className={`h-14 w-14 rounded transition-all duration-300 ease-out cursor-pointer ${isOpen ? 'bg-muted text-foreground hover:bg-muted/80' : 'bg-primary hover:bg-primary/90 hover:scale-105'} flex items-center justify-center`}
       >
         {isOpen ? <X className="w-6 h-6" /> : <MessageSquare className="w-6 h-6" />}
       </Button>
