@@ -1,4 +1,3 @@
-
 'use client';
 
 import './globals.css';
@@ -16,7 +15,7 @@ import { LoaderCircle } from 'lucide-react';
 import { SmartAssistant } from '@/components/legiflow/smart-assistant';
 
 const navItems = [
-    { href: '/dashboard', icon: Home, label: 'Home' },
+    { href: '/dashboard', icon: Home, label: 'Dashboard' },
     { href: '/analyze', icon: FileUp, label: 'Upload Documents' },
     { href: '/samples', icon: FileCheck, label: 'Sample Agreements' },
     { href: '/agreements', icon: FileText, label: 'Agreements' },
@@ -24,78 +23,55 @@ const navItems = [
     { href: '/reference', icon: Book, label: 'Legal Reference' },
     { href: '/search', icon: FileQuestion, label: 'Clause Search' },
     { href: '/compare', icon: BarChart, label: 'Compare' },
-    { href: '/notifications', icon: Gavel, label: 'Notifications' },
-    { href: '/help', icon: MessageSquare, label: 'Help' },
-    { href: '/settings', icon: Settings, label: 'Settings' },
 ];
 
 function AppHeader() {
-    const { user, logout } = useAuth();
     const { theme, toggleTheme } = useTheme();
+    const pathname = usePathname();
+
+    const pageTitle = navItems.find(item => pathname.startsWith(item.href))?.label || 'LegiFlow';
 
     return (
-        <header className="fixed left-0 right-0 top-0 h-16 flex items-center justify-between px-5 z-30 backdrop-blur-md bg-background/30">
-            <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white shadow-lg">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="opacity-90"
-                    >
-                      <path d="M4 22h16" />
-                      <path d="M4 22V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v14" />
-                      <path d="M12 6V4" />
-                      <path d="M12 14h-2" />
-                      <path d="M12 18h-4" />
+        <header className="fixed left-0 right-0 top-0 h-13 flex items-center justify-between px-5 z-30 backdrop-blur-md bg-background/30">
+            <div className="text-sm font-medium text-foreground">{pageTitle}</div>
+            <div className="flex items-center gap-5">
+                <button className="hover:bg-foreground/10 p-2 rounded-full">
+                    <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35M15 11a4 4 0 11-8 0 4 4 0 018 0z"></path>
                     </svg>
-                </div>
-                <div>
-                    <h1 className="font-bold text-lg">LegiFlow</h1>
-                </div>
-            </div>
-            <div className="flex items-center gap-2">
-                <Button variant="ghost" onClick={toggleTheme} size="sm">
+                </button>
+                <button onClick={toggleTheme} className="hover:bg-foreground/10 p-2 rounded-full">
                     {theme === 'dark' ? '🌙' : '☀️'}
-                </Button>
-                {user ? (
-                     <div className="flex items-center gap-3">
-                        <span className="text-sm font-medium px-3 py-1.5 rounded-full bg-card/80">{user.displayName || user.email}</span>
-                        <Button variant="ghost" size="sm" onClick={logout}><LogOut className="mr-2 h-4 w-4"/> Sign Out</Button>
-                     </div>
-                ) : (
-                    <Link href="/login">
-                        <Button>Sign In</Button>
-                    </Link>
-                )}
+                </button>
+                <button className="hover:bg-foreground/10 p-2 rounded-full">
+                    <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M12 20h.01M12 4h.01"></path>
+                    </svg>
+                </button>
+                <button className="hover:bg-foreground/10 p-2 rounded-full">
+                    <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4m0 4h.01M12 4h.01"></path>
+                    </svg>
+                </button>
+                <div className="w-7 h-7 bg-secondary text-primary flex items-center justify-center rounded-full">LL</div>
+                <button className="hover:bg-foreground/10 p-2 rounded-full">
+                    <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H3"></path>
+                    </svg>
+                </button>
             </div>
         </header>
     );
 }
 
 function AppLayout({ children }: { children: React.ReactNode }) {
-    const { user, loading } = useAuth();
     const pathname = usePathname();
 
-    if (loading) {
-        return <div className="flex h-screen w-full items-center justify-center bg-background text-foreground"><LoaderCircle className="h-8 w-8 animate-spin" /></div>;
-    }
-  
-    if (!user) {
-       return <>{pathname === '/login' && children}</>;
-    }
-  
     return (
         <div className="min-h-screen flex text-foreground relative">
             <AppHeader />
-            <div className="flex mt-16 h-[calc(100vh-4rem)] w-full">
+            <div className="flex mt-13 h-[calc(100vh-52px)] w-full">
                 <aside className="w-64 flex-col fixed h-full p-3 bg-gradient-to-b from-card/60 to-card/20 border-r border-border/50">
-                    <h3 className="text-base font-semibold text-foreground/80 px-3 mb-4">Navigation</h3>
                     <nav className="flex-grow space-y-1">
                         {navItems.map((item) => (
                             <Link
@@ -112,16 +88,11 @@ function AppLayout({ children }: { children: React.ReactNode }) {
                             </Link>
                         ))}
                     </nav>
-                     <div className="mt-auto p-3 text-xs text-muted-foreground">
-                         <p>Signed in as:</p>
-                         <div className="px-2 py-1 mt-2 rounded-full bg-card font-semibold text-center">{user.displayName || user.email}</div>
-                     </div>
                 </aside>
                 <main className="flex-1 ml-64 p-7 overflow-y-auto">
                     {children}
                 </main>
             </div>
-            <SmartAssistant />
         </div>
     );
 }
