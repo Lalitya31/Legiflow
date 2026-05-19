@@ -1,7 +1,7 @@
 'use client';
 
 import './globals.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ThemeProvider, useTheme } from '@/hooks/use-theme';
 import { Toaster } from '@/components/ui/toaster';
 import Link from 'next/link';
@@ -13,6 +13,7 @@ import { AuthProvider, useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/button';
 import { LoaderCircle } from 'lucide-react';
 import { SmartAssistant } from '@/components/legiflow/smart-assistant';
+import React, { useState } from 'react';
 
 const navItems = [
     { href: '/dashboard', icon: Home, label: 'Dashboard' },
@@ -23,6 +24,21 @@ const navItems = [
     { href: '/reference', icon: Book, label: 'Legal Reference' },
     { href: '/search', icon: FileQuestion, label: 'Clause Search' },
     { href: '/compare', icon: BarChart, label: 'Compare' },
+];
+
+const sections = [
+  {
+    number: "302",
+    title: "Murder",
+    description: "Whoever commits murder shall be punished with death, or imprisonment for life, and shall also be liable to fine.",
+    related: ["299", "303"],
+  },
+  {
+    number: "303",
+    title: "Culpable Homicide",
+    description: "Causing death by doing an act with the intention of causing death.",
+    related: ["302", "304"],
+  },
 ];
 
 function AppHeader() {
