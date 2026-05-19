@@ -9,7 +9,6 @@
     --text-primary: hsl(222.2, 84%, 4.9%);
     --text-muted: hsl(215.4, 16.3%, 46.9%);
     --border-subtle: hsl(214.3, 31.8%, 91.4%);
-    --accent: hsl(204, 92%, 53%);
     --danger: hsl(0, 84.2%, 60.2%);
     --warning: hsl(43, 96%, 56%);
     --success: hsl(120, 57%, 40%);
@@ -21,10 +20,24 @@
     --text-primary: hsl(210, 40%, 98%);
     --text-muted: hsl(215, 20%, 65%);
     --border-subtle: hsl(217, 33%, 17%);
-    --accent: hsl(204, 92%, 53%);
     --danger: hsl(0, 63%, 31%);
     --warning: hsl(43, 96%, 56%);
     --success: hsl(120, 57%, 40%);
+  }
+
+  .badge-high {
+    background-color: hsl(0, 84.2%, 60.2%, 0.15);
+    color: hsl(0, 84.2%, 60.2%);
+  }
+
+  .badge-medium {
+    background-color: hsl(43, 96%, 56%, 0.15);
+    color: hsl(43, 96%, 56%);
+  }
+
+  .badge-low {
+    background-color: hsl(120, 57%, 40%, 0.15);
+    color: hsl(120, 57%, 40%);
   }
 
   header {
