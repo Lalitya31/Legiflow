@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500&display=swap');
+
 @layer base {
   :root {
     --bg-primary: hsl(220, 20%, 96%);
@@ -12,6 +14,12 @@
     --danger: hsl(0, 84.2%, 60.2%);
     --warning: hsl(43, 96%, 56%);
     --success: hsl(120, 57%, 40%);
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 40px;
+    --space-2xl: 64px;
   }
 
   [data-theme="dark"] {
@@ -115,6 +123,51 @@
   }
   .button-ghost:hover {
     text-decoration: none;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  body, p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .text-muted {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text-muted);
+  }
+
+  nav a {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  nav a[data-active="true"] {
+    font-weight: 500;
+  }
+
+  button {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
   }
 }
 

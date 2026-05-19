@@ -33,7 +33,10 @@ function AppHeader() {
 
     return (
         <header className="fixed left-0 right-0 top-0 h-13 flex items-center justify-between px-5 z-30 backdrop-blur-md bg-background/30">
-            <div className="text-sm font-medium text-foreground">{pageTitle}</div>
+            <div className="flex flex-col gap-[var(--space-sm)]">
+                <h1 className="font-serif text-[40px] font-normal leading-[1.15] tracking-[-0.02em]">{pageTitle}</h1>
+                <p className="text-muted">One line description beneath it</p>
+            </div>
             <div className="flex items-center gap-5">
                 <button className="hover:bg-foreground/10 p-2 rounded-full">
                     <svg className="w-5 h-5 text-foreground" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
