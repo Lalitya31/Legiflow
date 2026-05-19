@@ -342,4 +342,65 @@
   .search-bar input:focus {
     border-color: var(--text-primary);
   }
+
+  .agreement-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .agreement-list li {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .agreement-list li:hover {
+    background-color: var(--bg-secondary);
+  }
+
+  .agreement-list .risk {
+    color: var(--danger);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .agreement-detail h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.15;
+  }
+
+  .agreement-detail .risk-level {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--danger);
+  }
+
+  .agreement-detail .issues ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .agreement-detail .issues li {
+    padding-left: var(--space-sm);
+    border-left: 2px solid;
+  }
+
+  .agreement-detail .issues li .title {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .agreement-detail .issues li .description {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
 }

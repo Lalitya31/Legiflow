@@ -1,6 +1,5 @@
-
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from '@/components/ui/badge';
 import { ShieldAlert, ShieldHalf, ShieldCheck } from 'lucide-react';
@@ -66,19 +65,86 @@ const RiskCard = ({ title, description, level }: { title: string, description: s
 }
 
 export default function RiskPage() {
+    const agreements = [
+        {
+            name: "Employment Contract",
+            risk: "HIGH RISK",
+            issues: 3,
+            lastAnalyzed: "May 18, 2026",
+            details: [
+                {
+                    title: "Non-compete clause",
+                    description: "Restricts employment within the same industry for 2 years post-exit.",
+                    severity: "High",
+                },
+                {
+                    title: "Forced arbitration",
+                    description: "Waives right to court proceedings. Disputes resolved internally only.",
+                    severity: "High",
+                },
+                {
+                    title: "Early termination penalty",
+                    description: "Penalty of 3 months salary applicable if contract broken early.",
+                    severity: "Medium",
+                },
+            ],
+        },
+    ];
+
+    const [selectedAgreement, setSelectedAgreement] = useState(agreements[0]);
+
     return (
-        <main>
-            <Card>
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold">🚨 High-Risk Agreements</CardTitle>
-                  <CardDescription>Common agreement types that frequently contain risky clauses.</CardDescription>
-                </CardHeader>
-                <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {highRiskAgreements.map((item, index) => (
-                        <RiskCard key={index} title={item.title} description={item.description} level={item.level as 'High' | 'Medium'} />
+        <main className="grid grid-cols-1 md:grid-cols-3 gap-[var(--space-lg)]">
+            {/* Left Panel */}
+            <div className="col-span-2">
+                <ul className="divide-y divide-border-subtle">
+                    {agreements.map((agreement, index) => (
+                        <li
+                            key={index}
+                            className="py-[var(--space-sm)] px-[var(--space-md)] hover:bg-secondary cursor-pointer"
+                            onClick={() => setSelectedAgreement(agreement)}
+                        >
+                            <div className="flex justify-between">
+                                <p className="font-medium text-sm">{agreement.name}</p>
+                                <p className="text-danger text-sm font-medium">{agreement.risk}</p>
+                            </div>
+                            <div className="flex justify-between text-xs text-muted">
+                                <p>Detected issues: {agreement.issues}</p>
+                                <p>Last analyzed: {agreement.lastAnalyzed}</p>
+                            </div>
+                        </li>
                     ))}
-                </CardContent>
-            </Card>
+                </ul>
+            </div>
+
+            {/* Right Panel */}
+            <div className="col-span-1 space-y-[var(--space-md)]">
+                <h2 className="font-serif text-[28px] font-normal leading-[1.15]">
+                    {selectedAgreement.name}
+                </h2>
+                <p className="text-danger text-[11px] font-medium uppercase tracking-[0.08em]">
+                    RISK LEVEL: {selectedAgreement.risk}
+                </p>
+                <div className="space-y-[var(--space-sm)]">
+                    <p className="text-sm font-medium">Issues detected:</p>
+                    <ul className="space-y-[var(--space-sm)]">
+                        {selectedAgreement.details.map((issue, index) => (
+                            <li
+                                key={index}
+                                className={`pl-[var(--space-sm)] border-l-2 ${
+                                    issue.severity === "High"
+                                        ? "border-danger"
+                                        : "border-warning"
+                                }`}
+                            >
+                                <p className="font-medium text-sm">{issue.title}</p>
+                                <p className="text-xs text-muted">{issue.description}</p>
+                                <p className="text-xs text-muted">Severity: {issue.severity}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
         </main>
     );
 }
