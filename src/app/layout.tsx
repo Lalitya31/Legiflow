@@ -78,6 +78,37 @@ const diffData = [
   },
 ];
 
+const timelineData = [
+  {
+    date: "Today",
+    activities: [
+      {
+        time: "11:05 AM",
+        text: "Lease Agreement flagged as High Risk",
+        description: "Non-compete and penalty clauses detected.",
+        type: "risk",
+      },
+      {
+        time: "10:42 AM",
+        text: "NDA contains restrictive non-compete clause",
+        description: "Review before signing.",
+        type: "risk",
+      },
+    ],
+  },
+  {
+    date: "Yesterday",
+    activities: [
+      {
+        time: "3:30 PM",
+        text: "Service Agreement marked safe",
+        description: "No high-risk clauses found.",
+        type: "safe",
+      },
+    ],
+  },
+];
+
 function AppHeader() {
     const { theme, toggleTheme } = useTheme();
     const pathname = usePathname();
@@ -310,6 +341,59 @@ export default function DiffView() {
         <p className="text-muted text-[14px]">
           Termination period stricter in 2025 version.
         </p>
+      </div>
+    </div>
+  );
+}
+
+export default function ActivityTimeline() {
+  return (
+    <div className="p-[var(--space-lg)]">
+      <h1 className="font-serif text-[40px] font-normal leading-[1.15] tracking-[-0.02em]">
+        Activity
+      </h1>
+
+      <div className="space-y-[var(--space-xl)] mt-[var(--space-lg)]">
+        {timelineData.map((section, index) => (
+          <div key={index} className="space-y-[var(--space-md)]">
+            <div className="flex items-center justify-between">
+              <h2 className="text-[11px] font-medium uppercase text-muted tracking-[0.08em]">
+                {section.date}
+              </h2>
+            </div>
+            <hr className="border-border-subtle" />
+
+            <ul className="space-y-[var(--space-sm)]">
+              {section.activities.map((activity, idx) => (
+                <li
+                  key={idx}
+                  className="flex items-start gap-[var(--space-md)] hover:bg-secondary p-[var(--space-sm)] rounded-md cursor-pointer"
+                >
+                  <span
+                    className={`mt-[var(--space-xs)] w-2 h-2 rounded-full ${
+                      activity.type === "risk"
+                        ? "bg-danger"
+                        : activity.type === "safe"
+                        ? "bg-success"
+                        : "bg-muted"
+                    }`}
+                  ></span>
+                  <div className="space-y-[var(--space-xs)]">
+                    <p className="text-[14px] font-medium leading-[1.6]">
+                      {activity.text}
+                    </p>
+                    <p className="text-[13px] text-muted leading-[1.6]">
+                      {activity.description}
+                    </p>
+                  </div>
+                  <p className="ml-auto text-[12px] text-muted font-medium">
+                    {activity.time}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   );
