@@ -50,6 +50,34 @@ const mockResults = [
   },
 ];
 
+const agreements = ["NDA_2024.pdf", "NDA_2025.pdf"];
+const diffData = [
+  {
+    clause: "Clause 4 — Termination",
+    changes: [
+      {
+        type: "removed",
+        text: "The contract may be terminated with 30 days notice.",
+        version: "2024",
+      },
+      {
+        type: "added",
+        text: "The contract may be terminated with 90 days notice.",
+        version: "2025",
+      },
+    ],
+  },
+  {
+    clause: "Clause 7 — Governing Law",
+    changes: [
+      {
+        type: "unchanged",
+        text: "This agreement shall be governed by the laws of India.",
+      },
+    ],
+  },
+];
+
 function AppHeader() {
     const { theme, toggleTheme } = useTheme();
     const pathname = usePathname();
@@ -215,6 +243,73 @@ export function LegalSpotlightSearch() {
             <p className="text-muted italic text-[12px]">{result.explanation}</p>
           </div>
         ))}
+      </div>
+    </div>
+  );
+}
+
+export default function DiffView() {
+  const [agreementA, setAgreementA] = useState(agreements[0]);
+  const [agreementB, setAgreementB] = useState(agreements[1]);
+
+  return (
+    <div className="p-[var(--space-lg)]">
+      {/* Agreement Selectors */}
+      <div className="flex justify-between items-center mb-[var(--space-lg)]">
+        <select
+          value={agreementA}
+          onChange={(e) => setAgreementA(e.target.value)}
+          className="border-b border-border-subtle focus:outline-none focus:border-foreground text-[14px]"
+        >
+          {agreements.map((agreement, index) => (
+            <option key={index} value={agreement}>
+              {agreement}
+            </option>
+          ))}
+        </select>
+        <select
+          value={agreementB}
+          onChange={(e) => setAgreementB(e.target.value)}
+          className="border-b border-border-subtle focus:outline-none focus:border-foreground text-[14px]"
+        >
+          {agreements.map((agreement, index) => (
+            <option key={index} value={agreement}>
+              {agreement}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* Diff View */}
+      <div className="space-y-[var(--space-xl)]">
+        {diffData.map((diff, index) => (
+          <div key={index} className="space-y-[var(--space-sm)]">
+            <h2 className="font-medium text-[16px]">{diff.clause}</h2>
+            {diff.changes.map((change, idx) => (
+              <div
+                key={idx}
+                className={`pl-[var(--space-sm)] border-l-2 ${
+                  change.type === "added"
+                    ? "border-success text-success/70"
+                    : change.type === "removed"
+                    ? "border-danger text-danger/70 line-through"
+                    : "border-border-subtle text-muted"
+                }`}
+              >
+                <p className="text-[14px] leading-[1.6]">{change.text}</p>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Summary Panel */}
+      <div className="mt-[var(--space-xl)] pt-[var(--space-lg)] border-t border-border-subtle">
+        <h3 className="font-medium text-[16px]">Differences summary</h3>
+        <p className="text-[14px]">3 clauses changed · 1 clause added · 0 clauses removed</p>
+        <p className="text-muted text-[14px]">
+          Termination period stricter in 2025 version.
+        </p>
       </div>
     </div>
   );

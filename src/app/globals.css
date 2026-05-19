@@ -460,4 +460,72 @@
     font-style: italic;
     color: var(--text-muted);
   }
+
+  .diff-view {
+    padding: var(--space-lg);
+  }
+
+  .agreement-select {
+    border-bottom: 1px solid var(--border-subtle);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    padding: var(--space-sm) 0;
+  }
+
+  .agreement-select:focus {
+    outline: none;
+    border-color: var(--foreground);
+  }
+
+  .diff-clause {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .diff-line {
+    padding-left: var(--space-sm);
+    border-left: 2px solid;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .diff-line.added {
+    border-color: var(--success);
+    color: var(--success);
+    opacity: 0.7;
+  }
+
+  .diff-line.removed {
+    border-color: var(--danger);
+    color: var(--danger);
+    opacity: 0.7;
+    text-decoration: line-through;
+  }
+
+  .diff-line.unchanged {
+    border-color: var(--border-subtle);
+    color: var(--text-muted);
+  }
+
+  .summary-panel {
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .summary-panel h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .summary-panel p {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+  }
+
+  .summary-panel .text-muted {
+    color: var(--text-muted);
+  }
 }
