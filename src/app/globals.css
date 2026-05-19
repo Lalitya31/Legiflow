@@ -46,6 +46,63 @@
   aside nav a:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
+
+  /* Sidebar active state */
+  aside nav a {
+    font-weight: 400;
+    border-radius: 0;
+  }
+  aside nav a[data-active="true"] {
+    font-weight: 500;
+    border-left: 2px solid var(--text-primary);
+    background-color: var(--bg-secondary);
+  }
+
+  /* Tab bars */
+  .tabs-list {
+    border: none;
+    background: none;
+  }
+  .tabs-trigger {
+    border: none;
+    background: none;
+    color: var(--text-muted);
+  }
+  .tabs-trigger[data-state="active"] {
+    border-bottom: 1.5px solid var(--text-primary);
+    color: var(--text-primary);
+  }
+
+  /* Cards */
+  .card {
+    border: 1px solid var(--border-subtle);
+    border-radius: 6px;
+    box-shadow: none;
+  }
+  .card-header {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  /* Buttons */
+  .button-primary {
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
+    border-radius: 5px;
+    box-shadow: none;
+  }
+  .button-secondary {
+    background-color: transparent;
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+  }
+  .button-ghost {
+    background: none;
+    color: var(--text-muted);
+    text-decoration: underline;
+  }
+  .button-ghost:hover {
+    text-decoration: none;
+  }
 }
 
 @layer base {
