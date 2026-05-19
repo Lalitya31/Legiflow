@@ -1,6 +1,3 @@
-
-'use client';
-
 import React, { useState, useMemo } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -14,6 +11,11 @@ import { CaseTimeline } from "@/components/legiflow/case-timeline";
 export default function DashboardPage() {
     const [selectedType, setSelectedType] = useState<CaseType | 'All'>('All');
     const [selectedStatus, setSelectedStatus] = useState<CaseStatus | 'All'>('All');
+    const recentActivity = [
+        { icon: '📄', title: 'NDA analyzed', time: '2 hours ago', detail: '3 high-risk clauses detected' },
+        { icon: '🔍', title: 'Clause search: "termination"', time: 'Yesterday', detail: 'Found in Employment Agreement' },
+        { icon: '📋', title: 'IPC Section 302 viewed', time: '2 days ago', detail: '' },
+    ];
 
     // Filter pipeline
     const filteredCases = useMemo(() => {
@@ -37,65 +39,61 @@ export default function DashboardPage() {
     }, [stats, filteredCases]);
 
     return (
-        <div className="space-y-6">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h2 className="text-3xl font-bold tracking-tight">Analytics Dashboard</h2>
-                    <p className="text-muted-foreground mt-1">Real-time insights and progression tracking for your cases.</p>
-                </div>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-[var(--space-lg)]">
+            {/* Left Column */}
+            <div className="col-span-3 space-y-[var(--space-lg)]">
+                {/* Hero Section */}
+                <section>
+                    <h1 className="font-serif text-[40px] font-normal leading-[1.15] tracking-[-0.02em]">
+                        Understand Legal Documents Clearly.
+                    </h1>
+                    <p className="text-muted mt-[var(--space-sm)]">
+                        Upload agreements, identify risky clauses, and explore Indian law in plain language.
+                    </p>
+                    <button className="mt-[var(--space-md)] bg-primary text-primary-foreground px-4 py-2 rounded">
+                        Upload a Document
+                    </button>
+                </section>
 
-                {/* Filters */}
-                <div className="flex flex-wrap items-center gap-3 bg-card p-2 rounded-lg border shadow-sm">
-                    <Select value={selectedType} onValueChange={(val: string) => setSelectedType(val as CaseType | 'All')}>
-                        <SelectTrigger className="w-[160px] h-9">
-                            <SelectValue placeholder="Case Type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="All">All Types</SelectItem>
-                            <SelectItem value="Corporate">Corporate</SelectItem>
-                            <SelectItem value="Civil">Civil</SelectItem>
-                            <SelectItem value="Intellectual Property">Intellectual Property</SelectItem>
-                            <SelectItem value="Employment">Employment</SelectItem>
-                        </SelectContent>
-                    </Select>
-
-                    <Select value={selectedStatus} onValueChange={(val: string) => setSelectedStatus(val as CaseStatus | 'All')}>
-                        <SelectTrigger className="w-[140px] h-9">
-                            <SelectValue placeholder="Status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="All">All Statuses</SelectItem>
-                            <SelectItem value="Open">Open</SelectItem>
-                            <SelectItem value="Pending">Pending</SelectItem>
-                            <SelectItem value="Closed">Closed</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
+                {/* Recent Legal Activity */}
+                <section>
+                    <h2 className="font-sans text-[18px] font-medium leading-[1.3] mb-[var(--space-sm)]">Recent Legal Activity</h2>
+                    {recentActivity.length > 0 ? (
+                        <ul className="space-y-[var(--space-sm)]">
+                            {recentActivity.map((activity, index) => (
+                                <li key={index} className="flex items-start gap-[var(--space-sm)]">
+                                    <span className="text-lg">{activity.icon}</span>
+                                    <div>
+                                        <p className="font-medium text-sm">{activity.title}</p>
+                                        <p className="text-muted text-xs">{activity.detail}</p>
+                                        <p className="text-muted text-xs">{activity.time}</p>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <p className="text-muted">Your legal activity will appear here.</p>
+                    )}
+                </section>
             </div>
 
-            {/* Smart Insight Banner */}
-            <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border border-primary/20 rounded-xl p-4 flex items-center gap-3">
-                <div className="bg-primary/20 p-2 rounded-full hidden sm:block">
-                    <Sparkles className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                    <h4 className="font-semibold text-sm">Smart Insight</h4>
-                    <p className="text-sm text-muted-foreground">{insightText}</p>
-                </div>
-            </div>
-
-            {/* Statistics */}
-            <DashboardStats total={stats.total} open={stats.open} closed={stats.closed} pending={stats.pending} />
-
-            {/* Charts Grid */}
-            <div className="grid lg:grid-cols-3 gap-6">
-                <CasesPerMonthChart data={monthlyData} />
-                <CaseStatusChart data={distributionData} />
-            </div>
-
-            {/* Timelines */}
-            <div className="grid grid-cols-1">
-                <CaseTimeline cases={filteredCases} />
+            {/* Right Column */}
+            <div className="col-span-2">
+                <h2 className="font-sans text-[18px] font-medium leading-[1.3] mb-[var(--space-sm)]">Quick Actions</h2>
+                <ul className="space-y-[var(--space-sm)]">
+                    <li className="flex justify-between items-center">
+                        <a href="/upload" className="text-primary hover:underline">Upload Document</a>
+                        <span className="text-muted">→</span>
+                    </li>
+                    <li className="flex justify-between items-center">
+                        <a href="/search" className="text-primary hover:underline">Search Clauses</a>
+                        <span className="text-muted">→</span>
+                    </li>
+                    <li className="flex justify-between items-center">
+                        <a href="/browse" className="text-primary hover:underline">Browse IPC</a>
+                        <span className="text-muted">→</span>
+                    </li>
+                </ul>
             </div>
         </div>
     );
